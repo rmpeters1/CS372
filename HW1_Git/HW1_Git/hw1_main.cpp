@@ -3,5 +3,5 @@
 // test project for homework1 - git
 
 int main() {
-    return 5;
+    return 30;
 }
