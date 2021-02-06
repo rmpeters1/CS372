@@ -38,3 +38,17 @@ TEST_CASE("Numbers greater than 1000 are ignored") {
 	REQUIRE(stringCalculator("20000") == 0);
 	REQUIRE(stringCalculator("1001") == 0);
 }
+TEST_CASE("A single char delimiter can be defined on the first line") {
+	REQUIRE(stringCalculator("#") == 0);
+	REQUIRE(stringCalculator("!") == 0);
+	REQUIRE(stringCalculator("*") == 0);
+}
+TEST_CASE("Multi char delimiter can be defined on the first line") {
+	REQUIRE(stringCalculator("#$") == 0);
+	REQUIRE(stringCalculator("!@#") == 0);
+	REQUIRE(stringCalculator("*@#$%") == 0);
+}
+TEST_CASE("A single or multi char delimiter can be defined on the first line") {
+	REQUIRE(stringCalculator("#") == 0);
+	REQUIRE(stringCalculator("!@#%") == 0);
+	REQUIRE(stringCalculator("%@*") == 0);
