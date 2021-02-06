@@ -1,44 +1,35 @@
+//Rose Peters
+//Jacob Jakiemiec
+//Assignment 2
+//TestCases.cpp
+
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
-#include "Factorial.hpp"
+#include "StringCalculator.hpp"
 
-
-TEST_CASE("Factorials are computed", "[factorial]") {
-	REQUIRE(Factorial(1) == 1);
-	REQUIRE(Factorial(2) == 2);
-	REQUIRE(Factorial(3) == 6);
-	REQUIRE(Factorial(10) == 3628800);
+TEST_CASE("An empty string returns 0") {
+	REQUIRE(stringCalculator("") == 0);
 }
-
-TEST_CASE("vectors can be sized and resized", "[vector]") {
-
-	std::vector<int> v(5);
-
-	REQUIRE(v.size() == 5);
-	REQUIRE(v.capacity() >= 5);
-
-	SECTION("resizing bigger changes size and capacity") {
-		v.resize(10);
-
-		REQUIRE(v.size() == 10);
-		REQUIRE(v.capacity() >= 10);
-	}
-	SECTION("resizing smaller changes size but not capacity") {
-		v.resize(0);
-
-		REQUIRE(v.size() == 0);
-		REQUIRE(v.capacity() >= 5);
-	}
-	SECTION("reserving bigger changes capacity but not size") {
-		v.reserve(10);
-
-		REQUIRE(v.size() == 5);
-		REQUIRE(v.capacity() >= 10);
-	}
-	SECTION("reserving smaller does not change size or capacity") {
-		v.reserve(0);
-
-		REQUIRE(v.size() == 5);
-		REQUIRE(v.capacity() >= 5);
-	}
+TEST_CASE("A single number returns the value") {
+	REQUIRE(stringCalculator("1") == 1);
+	REQUIRE(stringCalculator("5") == 5);
+}
+TEST_CASE("Two numbers, comma delimited, returns the sum") {
+	REQUIRE(stringCalculator("1,10") == 11);
+	REQUIRE(stringCalculator("3,2") == 5);
+}
+TEST_CASE("Two numbers, newline delimited, returns the sum") {
+	REQUIRE(stringCalculator("1\n2") == 3);
+	REQUIRE(stringCalculator("4\n5") == 9);
+}
+TEST_CASE("Three numbers, delimited either way, returns the sum") {
+	REQUIRE(stringCalculator("1,2,3") == 6);
+	REQUIRE(stringCalculator("1\n2\n3") == 6);
+	REQUIRE(stringCalculator("12,87\n43") == 12 + 87 + 43);
+	REQUIRE(stringCalculator("54\n32\n98") == 54 + 32 + 98);
+}
+TEST_CASE("Negative numbers throw an exception") {
+	REQUIRE(stringCalculator("-1") == 0);
+	REQUIRE(stringCalculator("-93") == 0);
+	REQUIRE(stringCalculator("-734") == 0);
 }
