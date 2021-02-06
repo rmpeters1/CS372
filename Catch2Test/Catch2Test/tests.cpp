@@ -1,7 +1,7 @@
 //Rose Peters
 //Jacob Jakiemiec
 //Assignment 2
-//TestCases.cpp
+//tests.cpp
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
@@ -40,15 +40,16 @@ TEST_CASE("Numbers greater than 1000 are ignored") {
 }
 TEST_CASE("A single char delimiter can be defined on the first line") {
 	REQUIRE(stringCalculator("#") == 0);
-	REQUIRE(stringCalculator("!") == 0);
-	REQUIRE(stringCalculator("*") == 0);
+	REQUIRE(stringCalculator("%") == 0);
+	REQUIRE(stringCalculator("@") == 0);
 }
 TEST_CASE("Multi char delimiter can be defined on the first line") {
-	REQUIRE(stringCalculator("#$") == 0);
-	REQUIRE(stringCalculator("!@#") == 0);
+	REQUIRE(stringCalculator("##") == 0);
+	REQUIRE(stringCalculator("###") == 0);
 	REQUIRE(stringCalculator("*@#$%") == 0);
 }
 TEST_CASE("A single or multi char delimiter can be defined on the first line") {
 	REQUIRE(stringCalculator("#") == 0);
 	REQUIRE(stringCalculator("!@#%") == 0);
 	REQUIRE(stringCalculator("%@*") == 0);
+}

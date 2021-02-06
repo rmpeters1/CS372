@@ -14,6 +14,15 @@ using std::vector;
 //takes a string as an argument
 //returns the sum of the numbers inside the string
 int stringCalculator(string equation) {
+	bool allDelimiter = true; // catch strings without any int
+	for (char x : equation) {
+		if (x >= '0' && x <= '9') {
+			allDelimiter = false;
+			break;
+		}
+	}
+	if (allDelimiter == true) return 0;
+
 	int index = 0;
 	int sum = 0;
 	vector<string> terms(3, "");
