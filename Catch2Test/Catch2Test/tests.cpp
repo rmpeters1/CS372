@@ -33,3 +33,8 @@ TEST_CASE("Negative numbers throw an exception") {
 	REQUIRE(stringCalculator("-93") == 0);
 	REQUIRE(stringCalculator("-734") == 0);
 }
+TEST_CASE("Numbers greater than 1000 are ignored") {
+	REQUIRE(stringCalculator("94743") == 0);
+	REQUIRE(stringCalculator("20000") == 0);
+	REQUIRE(stringCalculator("1001") == 0);
+}
